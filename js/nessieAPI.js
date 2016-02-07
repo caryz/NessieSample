@@ -11,8 +11,6 @@ function main() {
 }
 
 function updateAtmLocation() {
-  var mapppp = map
-  var mapCenter = map.getCenter()
   var lat = map.getCenter().lat()
   var lng = map.getCenter().lng()
   getAtms(lat, lng)
@@ -32,6 +30,7 @@ function getAtms(lat, lng) {
 
 function drawAllAtmMarkers() {
   console.log(atms)
+  writeInHtml("accounts", "ATM: " + atms.data[0].name)
   var atmData = atms.data
   var atm = null
   var i
@@ -39,13 +38,12 @@ function drawAllAtmMarkers() {
     atm = atmData[i]
     var title = atm.name
     var addr = atm.address
-    var content = "<h5>" + title +"</h5>" +
+    var content = "<h3>" + title +"</h3>" +
                   "<b>Address: </b>" + addr.street_number + " " + addr.street_name + ", " +
                   " " + addr.city + " " + addr.state + " " + addr.zip + "<br/>" +
                   "<b>Hours: </b>" + atm.hours[0] + "<br/>" +
                   "<b>Accessibility: </b>"
      atm.accessibility ? content += "accessible as FUCK" : content += "get rekt m8"
-
 
     drawAtmMarker(atm.geocode.lat, atm.geocode.lng, title, content)
   }
