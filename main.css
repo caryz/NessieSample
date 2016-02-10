@@ -5,10 +5,17 @@ html, body {
   padding: 0; 
 }
 
-#accounts {
+#sampleRequestsWrapper {
   background-color: #ddd;
   height: 20%;
   min-height: 100px;
+}
+
+#customers, #accounts, #bills, #purchase {
+  border: 2px solid red;
+  min-width: 150px;
+  max-height: 300px;
+  overflow:auto;
 }
 
 #map { 

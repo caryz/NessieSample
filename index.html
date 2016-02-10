@@ -5,13 +5,22 @@
   </head>
   <body>
     <!-- layout -->
-    <div id="accounts"></div>
-      <!--<div id="floating-panel">
-        <input onclick="updateAtmLocation()" type=button value="Update ATM Location">
+    <div id="sampleRequestsWrapper">
+      <table>
+        <tr>
+          <td>customers<br/><div id="customers"></div></td>
+          <td>accounts<br/><div id="accounts"></div></td>
+          <td>bills<br/><div id="bills"></div></td>
+          <td>purchase<br/><div id="purchase"></div></td>
+        </tr>
+      </table>
+    </div>
+      <div id="floating-panel">
+        <input onclick="deleteMarkers(); updateAtmLocation()" type=button value="Update ATM Location">
         <input onclick="clearMarkers();" type=button value="Hide Markers">
         <input onclick="showMarkers();" type=button value="Show All Markers">
         <input onclick="deleteMarkers();" type=button value="Delete Markers">
-      </div>-->
+      </div>
     <div id="map"></div>
 
     <!-- js -->

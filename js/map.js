@@ -10,33 +10,27 @@ function initMap() {
     zoom: 11
   });
 
-  google.maps.event.addListener(map,'idle',function(){
-    if(!this.get('dragging') && this.get('oldCenter') && this.get('oldCenter')!==this.getCenter()) {
-      deleteMarkers()
-      updateAtmLocation()
-      // center
-      var lat = map.getCenter().lat()
-      var lng = map.getCenter().lng()
-      var m = new google.maps.Marker({
-            map: map,
-            position: {lat, lng},
-            icon: 'asset/blueMarker.png',
-        });
-      markers.push(m)
-    }
-    if(!this.get('dragging')){
-     this.set('oldCenter',this.getCenter())
-    }
-  });
+  // google.maps.event.addListener(map,'idle',function(){
+  //   if(!this.get('dragging') && this.get('oldCenter') && this.get('oldCenter')!==this.getCenter()) {
+  //     deleteMarkers()
+  //     updateAtmLocation()
+  //     // center
+  //     var lat = map.getCenter().lat()
+  //     var lng = map.getCenter().lng()
+  //   }
+  //   if(!this.get('dragging')){
+  //    this.set('oldCenter',this.getCenter())
+  //   }
+  // });
 
-  google.maps.event.addListener(map,'dragstart',function(){
-    this.set('dragging',true);          
-  });
+  // google.maps.event.addListener(map,'dragstart',function(){
+  //   this.set('dragging',true);          
+  // });
 
-  google.maps.event.addListener(map,'dragend',function(){
-    this.set('dragging',false);
-    google.maps.event.trigger(this,'idle',{});
-  });
+  // google.maps.event.addListener(map,'dragend',function(){
+  //   this.set('dragging',false);
+  //   google.maps.event.trigger(this,'idle',{});
+  // });
 }
 
 // --- Markers --- //
