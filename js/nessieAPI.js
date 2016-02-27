@@ -1,21 +1,21 @@
 "use strict"
 
 // --- Global Variables --- //
-var apiKey = "562af076e8f2edf99452364e33679082";
+var apiKey = "398b829696d2df393c9e99a16af69903";
 var atms = null // atm array
 
 var accounts = null
 var customers = null
 var bills = null
-var purchase = null
+var purchases = null
 
 
 function main() {
   // use default values (geolocation too annoying)
   getRequest("accounts")
   getRequest("customers")
-  getRequest("accounts/56241a13de4bf40b171128bb/bills")
-  getRequest("purchase")
+  getRequest("customers/56c66be5a73e49274150735f/bills")
+  getRequest("accounts/56c66be6a73e492741507d64/purchases")
   getAtms(38.8960952, -77.1333157, 1)
 }
 
@@ -38,7 +38,7 @@ function getCustomers() {
   for(var i = 0; i < customers.length; i++) {
     cust = customers[i]
     content +=  "<b>Cust id: </b>" + cust._id + "<br/>" +
-                "<b>Name: </b>" + cust.first_name + " " + cust.last_name + "<br/>" 
+                "<b>Name: </b>" + cust.first_name + " " + cust.last_name + "<br/><br/>" 
   }
   writeInHtml("customers", content)
 }
@@ -50,13 +50,22 @@ function getBills() {
     bill = bills[i]
     content +=  "<b>bill id: </b>" + bill._id + "<br/>" +
                 "<b>status: </b>" + bill.status + "<br/>" +
-                "<b>date: </b>" + bill.payment_date + "<br/>" 
+                "<b>date: </b>" + bill.payment_amount + "<br/><br/>" 
   }
   writeInHtml("bills", content)
-  console.log(content)
 }
 
 function getPurchases() {
+  var content = ""
+  var purchase = null
+  console.log("hi")
+  for(var i = 0; i < purchases.length; i++) {
+    purchase = purchases[i]
+    content +=  "<b>purchase id: </b>" + purchase._id + "<br/>" +
+                "<b>status: </b>" + purchase.status + "<br/>" +
+                "<b>date: </b>" + purchase.amount + "<br/><br/>" 
+  }
+  writeInHtml("purchases", content)
 
 }
 
@@ -107,7 +116,7 @@ function writeInHtml(documentId, content) {
 
 function getRequest(endpoint) {
   $.ajax({
-    url: "http://api.reimaginebanking.com/" + endpoint + "?lat=" + "&key=" + apiKey,
+    url: "http://api.reimaginebanking.com/" + endpoint + "?key=" + apiKey,
     type: "GET",
     contentType: 'application/json',  // this is a required header
     success: function(resultsJson) {
@@ -120,12 +129,12 @@ function getRequest(endpoint) {
           customers = resultsJson
           getCustomers()
           break;
-        case "accounts/56241a13de4bf40b171128bb/bills":
+        case "customers/56c66be5a73e49274150735f/bills":
           bills = resultsJson
           getBills()
           break;
-        case "purchase":
-          purchase = resultsJson
+        case "accounts/56c66be6a73e492741507d64/purchases":
+          purchases = resultsJson
           getPurchases()
           break;
          break;
